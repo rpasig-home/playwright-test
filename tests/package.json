@@ -1,0 +1,15 @@
+{
+  "name": "mock-trading-tests",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:api": "playwright test --config=playwright.config.ts",
+    "test:api:headed": "playwright test --config=playwright.config.ts --headed",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.47.2",
+    "ajv": "^8.17.1",
+    "typescript": "^5.5.4"
+  }
+}
