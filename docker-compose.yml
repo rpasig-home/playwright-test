@@ -1,0 +1,25 @@
+services:
+  mock-api:
+    build:
+      context: ./mock-api
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - API_KEY=${API_KEY:-local-dev-key}
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000/healthz', r=>process.exit(r.statusCode===200?0:1)).on('error',()=>process.exit(1))"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  tests:
+    build:
+      context: ./tests
+    depends_on:
+      mock-api:
+        condition: service_healthy
+    environment:
+      - BASE_URL=http://mock-api:3000
+      - API_KEY=${API_KEY:-local-dev-key}
+    command: ["npm", "run", "test:api"]
