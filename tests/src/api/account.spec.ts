@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+test.describe.configure({ mode: 'serial' });
 import { accountSchema } from "../helpers/schemas.js";
 import { expectSchema } from "../helpers/assertions.js";
 import { resetApi } from "../helpers/client.js";
