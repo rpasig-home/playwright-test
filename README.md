@@ -33,3 +33,7 @@ Terminal 2:
     npm i
     BASE_URL=http://localhost:3000
     API_KEY=local-dev-key npm run test:api
+
+
+ Note:
+ API tests run with a single worker because the mock service is stateful/in-memory; parallel execution would require per-test state isolation.   
