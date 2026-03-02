@@ -13,6 +13,9 @@ test.describe("Orders", () => {
     const before = await (await request.get("/v1/account")).json();
     const ordersBefore = await (await request.get("/v1/orders")).json();
     console.log("Before buy: cash=", before.cash, "orders=", ordersBefore.length);
+    if (ordersBefore.length > 0) {
+      console.log("Orders before buy:", ordersBefore);
+    }
     expectSchema(accountSchema, before);
 
     const res = await request.post("/v1/orders", {
